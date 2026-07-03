@@ -1,0 +1,20 @@
+body {
+    background-color: azure;
+}
+
+#form-body {
+    min-width: 600px;
+    width: 500px;
+    border: 2px solid grey;
+    padding: 3%;
+    margin-top: 5%;
+    background-color: white;
+    border-radius: 20px;
+    min-height: 350px;
+    height: fit-content;
+    margin: auto;
+    box-shadow: 0 0 20px rgba(13, 202, 240, 0.4);
+}
+
+
+

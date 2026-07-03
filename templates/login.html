@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Login Page</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-info">
+        <div class="container">
+            <div class="navbar-brand ">
+                <a class="navbar-brand fw-bold fs-4" href="/">TrekEase</a>
+            </div>
+
+
+        </div>
+    </nav><br>
+    <div class="text-center">
+        <h2>Welcome back!</h2>
+        <p>Login to continue your trekking journey.</p>
+    </div>
+    <div class="container">
+        <div id="form-body">
+        <form class="row g-3" action="/login" method="POST">
+
+            <div class="col-md-12">
+                <label for="inputEmail4" class="form-label">Username</label>
+                <input type="Text" class="form-control" id="inputEmail4" name="username">
+            </div>
+            <div class="col-md-12">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword4" name="password">
+            </div>
+            <div class="text-center d-grid gap-2">
+                <input type="submit" class="btn btn-success rounded-4" value="Sign in">
+            </div>
+            <div class="text-center">
+                <p>- OR -</p>
+            </div>
+            <div class="text-center d-grid gap-2">
+                <a href=/register/user class="btn btn-info rounded-4">Register as User</a>
+            </div>
+            <div class="text-center d-grid gap-2">
+                <a href=/register/staff class="btn btn-outline-info rounded-4">Register as Staff</a>
+            </div>
+
+        </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
