@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Trekkers Page</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info shadow-sm">
+        <div class="container">
+            <div class="navbar-brand ">
+                <a class="navbar-brand fw-bold fs-4" href="admin_dashboard">TrekEase</a>
+            </div>
+                <ul class="nav align-items-center">
+                    <li class="nav-item"><a class="nav-link active link-light" href="admin_dashboard">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="treks">Treks</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="staff">Staff</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="pending_staff">Applications</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="#">Trekkers</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="bookings">Bookings</a></li>
+                    <li class="nav-item ms-2">
+                        <a href="/" class="btn btn-outline-light rounded-4">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container text-center">
+        <div class="text-center mt-4">
+            <div class="row my-4 g-3">
+                <div class="mb-2 d-flex justify-content-between align-items-center w-100 border-bottom pb-2">
+                    <h2 class="fw-semibold">Users</h2>
+                    <form class="row g-3">
+                        <div class="col-auto">
+                            <input type="text" class="form-control rounded-3" placeholder="Search" name="keyword">
+
+                        </div>
+                        <div class="col-auto">
+                            <select class="form-select rounded-3" aria-label="Default select example" name="parameter">
+                                <option value="3">Name</option>
+                                <option value="1">id</option>
+                                <option value="3">Userame</option>
+                                <option value="3">Email</option>
+                                <option value="2">Phone No</option>
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <input type="submit" class="btn btn-outline-success rounded-3 mb-3" value="Search">
+                        </div>
+                    </form>
+                </div>
+                <div class="admin-tables mb-4">
+                    <h3 class="fw-semibold mb-3 border-bottom pb-2">Trekkers</h3>
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="text-center table-light sticky-top">
+                            <tr>
+                                <th scope="col">user id</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone No.</th>
+                                <th scope="col">Joined On</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            {% for user in trekkers %}
+                            <tr>
+                                <td>{{user.id}}</td>
+                                <td>{{user.name}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.phone_no}}</td>
+                                <td>{{user.created_at.strftime("%d %B %Y")}}</td>
+                                <td>{{user.status}}</td>
+                                <td>
+                                    {% if user.status == "Active" %}
+                                    <a href="#" class="btn btn-outline-danger btn-sm rounded-3">Block</a>
+                                    {% else %}
+                                    <a href="#" class="btn btn-outline-success btn-sm rounded-3">Unblock</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

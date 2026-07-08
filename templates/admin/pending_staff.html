@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Staff Page</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info shadow-sm">
+        <div class="container">
+            <div class="navbar-brand ">
+                <a class="navbar-brand fw-bold fs-4" href="admin_dashboard">TrekEase</a>
+            </div>
+                <ul class="nav align-items-center">
+                    <li class="nav-item"><a class="nav-link active link-light" href="admin_dashboard">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="treks">Treks</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="staff">Staff</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="#">Applications</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="users">Trekkers</a></li>
+                    <li class="nav-item"><a class="nav-link link-light" href="bookings">Bookings</a></li>
+                    <li class="nav-item ms-2">
+                        <a href="/" class="btn btn-outline-light rounded-4 ">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container text-center">
+        <div class="text-center mt-4">
+            <div class="row my-4 g-3">
+                <div class="d-flex justify-content-between align-items-center w-100 border-bottom mb-2 pb-2">
+                    <h2 class="fw-semibold">Staff</h2>
+                </div>
+                <div class="admin-tables mb-4">
+                    <h3 class="fw-semibold mb-3 border-bottom pb-2">Applications</h3>
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="text-center table-light sticky-top">
+                                <tr>
+                                    <th scope="col">id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone No.</th>
+                                    <th scope="col">Applied on</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                                {% for staff in all_staff %}
+                                <tr>
+                                    <td>{{loop.index}}</td>
+                                    <td>{{staff.name}}</td>
+                                    <td>{{staff.email}}</td>
+                                    <td>{{staff.phone_no}}</td>
+                                    <td>{{staff.created_at.strftime("%d %B %Y")}}</td>
+                                    <td>{{staff.status}}</td>
+                                    <td>
+                                        <a href="#" class=" btn btn-success rounded-3 btn-sm ">Approve</a>
+                                        <a href="#" class="btn btn-outline-danger btn-sm rounded-3">Reject</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</body>
+
+</html>
