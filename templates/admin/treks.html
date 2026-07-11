@@ -25,7 +25,7 @@
                     <a href="/" class="btn btn-outline-light rounded-4">Logout</a>
                 </li>
             </ul>
-        </div>
+
         </div>
     </nav>
     <div class="container text-center">
@@ -59,10 +59,10 @@
                             <tr>
                                 <th scope="col">id</th>
                                 <th scope="col">Trek Name</th>
-                                <th scope="col">Location</th>
-                                <th scope="col">Assign Staff</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th class="col-2"scope="col">Location</th>
+                                <th class="col-2" scope="col">Assigned Staff id</th>
+                                <th class="col-2" scope="col">Status</th>
+                                <th class="col-3" scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
@@ -74,9 +74,16 @@
                                 <td>{{trek.staff_id}}</td>
                                 <td>{{trek.status}}</td>
                                 <td>
-                                    <a href="#" class=" btn btn-outline-warning rounded-3 btn-sm ">Manage</a>
-                                    <a href="#" class="btn btn-info btn-sm rounded-3">Edit</a>
-                                    <a href="#" class="btn btn-outline-danger btn-sm rounded-3">Remove</a>
+                                    {% if trek.status == 'Open' %}
+                                    <a href="/details/1/trek/{{trek.id}}"
+                                        class="btn btn-outline-secondary btn-sm rounded-3">View Details</a>
+                                    <a href="/admin_update/trek/close/{{trek.id}}"
+                                        class=" btn btn-danger text-white rounded-3 btn-sm ">Close</a>
+                                    {% elif trek.status == 'Close' %}
+                                    <a href="/details/1/trek/{{trek.id}}" class="btn btn-outline-secondary btn-sm rounded-3">View Details</a>
+                                    <a href="/admin_update/trek/close/{{trek.id}}"
+                                        class=" btn btn-danger text-white rounded-3 btn-sm disabled">Close</a>
+                                    {% endif %}
                                 </td>
                             </tr>
                             {% endfor %}
@@ -84,7 +91,7 @@
                     </table>
 
                 </div>
-                <a href="#" class=" btn btn-outline-success rounded-4">Add Trek</a>
+                <a href="/create_trek" class=" btn btn-outline-success rounded-4">Add Trek</a>
 
             </div>
         </div>

@@ -64,7 +64,6 @@
                     <div class="col-auto">
                         <select class="form-select rounded-3" aria-label="Default select example" name="parameter">
                             <option value="3">Name</option>
-                            <option value="1">id</option>
                             <option value="3">Location</option>
                             <option value="3">Difficulty</option>
                             <option value="2">Duration</option>
@@ -76,7 +75,7 @@
                 </form>
             </div>
             {% for trek in treks %}
-            <div class="col-md-4 col-sm-6 py-2">
+            <div class="col-md-3 col-sm-6 py-2">
                 <div class="card h-100 rounded-4 overflow-hidden " id="border-blue">
                     <img src="{{trek.image}}" class="card-img-top object-fit-cover" style="height: 200px;"
                         alt="{{ trek.trek_name }}">
@@ -89,8 +88,8 @@
                                 <p class="text-muted small mb-0"><i class="bi bi-geo-alt"></i> {{trek.location}}</p>
                             </div>
 
-                            <span class="badge bg-success rounded-pill px-3 py-2">
-                                {{trek.status}}
+                            <span class="badge bg-success rounded-pill px-2 py-2">
+                                {{trek.available_slots}} Slots
                             </span>
                         </div>
 
@@ -101,8 +100,8 @@
                                 {{trek.end_date.strftime("%d %b %Y")}}
                             </p>
 
-                            <a href="#" class="btn btn-warning rounded-4 w-100 btn-sm fw-semibold">
-                                More
+                            <a href="/details/{{user.id}}/trek/{{trek.id}}" class="btn btn-warning rounded-4 w-100 btn-sm fw-semibold">
+                                Explore
                             </a>
                         </div>
 

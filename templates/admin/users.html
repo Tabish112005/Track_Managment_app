@@ -75,11 +75,12 @@
                                 <td>{{user.phone_no}}</td>
                                 <td>{{user.created_at.strftime("%d %B %Y")}}</td>
                                 <td>{{user.status}}</td>
-                                <td>
+                                <td class="col-2">
+                                    <a href="/details/1/user/{{user.id}}" class="btn btn-outline-secondary btn-sm rounded-3">View Details</a>
                                     {% if user.status == "Active" %}
-                                    <a href="#" class="btn btn-outline-danger btn-sm rounded-3">Block</a>
+                                    <a href="/admin_update/user/blacklist/{{user.id}}" class="btn btn-outline-danger btn-sm rounded-3">Block</a>
                                     {% else %}
-                                    <a href="#" class="btn btn-outline-success btn-sm rounded-3">Unblock</a>
+                                    <a href="/admin_update/user/whitelist/{{user.id}}" class="btn btn-outline-success btn-sm rounded-3">Unblock</a>
                                     {% endif %}
                                 </td>
                             </tr>

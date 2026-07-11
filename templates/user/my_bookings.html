@@ -63,20 +63,20 @@
                     <table class="table table-hover align-middle mb-0">
                         <thead class="text-center table-light sticky-top">
                             <tr>
-                                <th scope="col">id</th>
+                                <th scope="col">S No.</th>
                                 <th scope="col">Trek Name</th>
-                                <th scope="col">Assigned Staff</th>
+                                <th scope="col">Booking Date</th>
                                 <th scope="col">Duration</th>
                                 <th scope="col">Complete On</th>
                                 <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
-                            {% for book in bookings %}
+                            {% for book in user.bookings %}
                             <tr>
-                                <td>#{{book.id}}</td>
+                                <td>#{{loop.index}}</td>
                                 <td>{{book.trek.trek_name}}</td>
-                                <td>{{book.staff.name}}</td>
+                                <td>{{book.booking_date}}</td>
                                 <td>{{book.trek.duration}}</td>
                                 <td>{{book.trek.end_date.strftime("%d %B %Y")}}</td>
                                 <td>{{book.status}}</td>

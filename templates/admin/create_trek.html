@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Dashboard Page</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info shadow-sm">
+        <div class="container">
+            <div class="navbar-brand ">
+                <a class="navbar-brand fw-bold fs-4" href="#">TrekEase</a>
+            </div>
+            <ul class="nav align-items-center">
+                <li class="nav-item"><a class="nav-link active link-light" href="admin_dashboard">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link link-light" href="treks">Treks</a></li>
+                <li class="nav-item"><a class="nav-link link-light" href="staff">Staff</a></li>
+                <li class="nav-item"><a class="nav-link link-light" href="pending_staff">Applications</a></li>
+                <li class="nav-item"><a class="nav-link link-light" href="users">Trekkers</a></li>
+                <li class="nav-item"><a class="nav-link link-light" href="bookings">Bookings</a></li>
+                <li class="nav-item ms-2">
+                    <a href="/" class="btn btn-outline-light rounded-4">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <div class="text-center border-bottom">
+        <h2>Create Trek</h2>
+    </div>
+    <br>
+    <div class="container d-flex">
+        <div id="create_trek">
+            <form class="row g-3" action="/create_trek" method="POST">
+
+                <div class="col-6">
+                    <label for="input1" class="form-label">Trek Name</label>
+                    <input type="text" class="form-control" id="input1" name="trek_name" required>
+                </div>
+                <div class="col-6">
+                    <label for="input2" class="form-label">Location</label>
+                    <input type="text" class="form-control" id="input2"  name="location" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="input3" class="form-label">Image Link</label>
+                    <input type="Text" class="form-control" id="input3" name="image" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="input4" class="form-label">Difficulty</label>
+                    <select id="input4" class="form-select" id="input4" name="difficulty" required>
+                        <option selected>Difficulty</option>
+                        <option>Easy</option>
+                        <option>Medium</option>
+                        <option>Hard</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="input5" class="form-label">Duration</label>
+                    <input type="number" class="form-control" id="input5" name="duration" required>
+                    </select>
+                </div>
+                
+                <div class="col-md-3">
+                    <label for="input6" class="form-label">Slots</label>
+                    <input type="number" class="form-control" id="input6" name="available_slots" required>
+                </div>
+                <div class="col-md-3">
+                    <label for="input7" class="form-label">Status</label>
+                    <select id="input7" class="form-select" name="status" required>
+                        <option selected>Status</option>
+                        <option>Open</option>
+                        <option>Close</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label for="input8" class="form-label">Starting Date</label>
+                    <input type="date" class="form-control" id="input8" name="start_date" required>
+                </div>
+                <div class="col-6">
+                    <label for="input9" class="form-label">Ending Date</label>
+                    <input type="date" class="form-control" id="input9" name="end_date" required>
+                </div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label for="input0" class="form-label">Description</label>
+                        <textarea class="form-control" id="input0" rows="3" name="description" required></textarea>
+                    </div>
+                </div>
+                <div class="text-center d-grid gap-2">
+                    <input type="submit" class="btn btn-success rounded-4" value="Create">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

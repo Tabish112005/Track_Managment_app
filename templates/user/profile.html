@@ -38,10 +38,11 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-info shadow-sm">
         <div class="container">
             <div class="navbar-brand ">
-                <a class="navbar-brand fw-bold fs-4" href="#">TrekEase</a>
+                <a class="navbar-brand fw-bold fs-4" href="/user_dashboard/{{user.id}}">TrekEase</a>
             </div>
             <ul class="nav align-items-center">
-                <li class="nav-item"><a class="nav-link active link-light" href="/user_dashboard/{{user.id}}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link active link-light"
+                        href="/user_dashboard/{{user.id}}">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link link-light" href="/user_treks/{{user.id}}">Treks</a></li>
                 <li class="nav-item"><a class="nav-link link-light" href="/my_bookings/{{user.id}}">Bookings</a></li>
                 <li class="nav-item"><a class="nav-link link-light" href="/profile/{{user.id}}">Profile</a></li>
@@ -56,8 +57,9 @@
     <div class="container d-flex justify-content-between align-items-center w-100 border-bottom pb-2">
         <h2 class="fw-semibold">My Profile</h2>
     </div>
+    <br>
     <div class="container my-3">
-        <div class="row ">
+        <div class="row g-4 ">
 
             <div class="col-md-6  p-4 border rounded-4" id="form-body">
                 <div class="  row">
@@ -72,22 +74,23 @@
                         <p class="my-0 text-mute fs-6">Update your personal details</p>
                     </div>
                 </div><br>
-                <form class="row g-3" action="#" method="POST">
+                <form class="row g-3" action="" method="POST">
 
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="Enter your name"
+                        <input type="text" class="form-control" id="inputAddress" value="{{user.name}}" required
                             name="name">
                     </div>
 
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Email</label>
-                        <input type="Email" class="form-control" id="inputAddress" placeholder="Example@gmail.com"
+                        <input type="Email" class="form-control" id="inputAddress" value="{{user.email}}" required
                             name="email">
                     </div>
                     <div class="col-12">
                         <label for="inputAddress2" class="form-label">Phone No.</label>
-                        <input type="text" class="form-control" id="inputAddress2" name="phone_no">
+                        <input type="text" class="form-control" id="inputAddress2" value="{{user.phone_no}}" required
+                            name="phone_no">
                     </div>
                     <div class="col-12">
 
@@ -109,11 +112,11 @@
 
                     <div class="col-md-12">
                         <label for="inputCurrent4" class="form-label">Current Password</label>
-                        <input type="password" class="form-control" id="inputEmail4" name="current">
+                        <input type="password" class="form-control" id="inputEmail4" name="current" required>
                     </div>
                     <div class="col-md-12">
-                        <label for="inputUpdated4" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="inputPassword4" name="updated">
+                        <label for="inputUpdated4" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="inputPassword4" name="updated" required>
                     </div>
                     <div class="col-12">
 
@@ -121,8 +124,8 @@
                     <div class="text-center d-grid gap-2">
                         <input type="submit" class="btn btn-outline-primary rounded-4" value="Update">
                     </div>
-                    
-                    
+
+
 
                 </form>
             </div>

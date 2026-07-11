@@ -25,7 +25,7 @@
                     <a href="/" class="btn btn-outline-light rounded-4">Logout</a>
                 </li>
             </ul>
-        </div>
+
         </div>
     </nav>
     <div class="container text-center">
@@ -42,6 +42,7 @@
                             <select class="form-select rounded-3" aria-label="Default select example" name="parameter">
                                 <option value="3">Name</option>
                                 <option value="1">id</option>
+                                <option value="3">Username</option>
                                 <option value="3">Email</option>
                                 <option value="2">Phone No</option>
                             </select>
@@ -61,7 +62,7 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Phone No.</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+                                <th class="col-2" scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
@@ -73,11 +74,13 @@
                                 <td>{{staff.phone_no}}</td>
                                 <td>{{staff.status}}</td>
                                 <td>
+                                    <a href="/details/1/staff/{{staff.id}}" class="btn btn-outline-secondary btn-sm rounded-3">View Info</a>
                                     {% if staff.status == "Active" %}
-                                    <a href="#" class="btn btn-warning btn-sm rounded-3">Assign</a>
-                                    <a href="#" class=" btn btn-outline-danger rounded-3 btn-sm ">Block</a>
+                                    <a href="/admin_update/staff/blacklist/{{staff.id}}"
+                                        class=" btn btn-danger rounded-3 btn-sm ">Block</a>
                                     {% else %}
-                                    <a href="#" class="btn btn-outline-success btn-sm rounded-3">Unblock</a>
+                                    <a href="/admin_update/staff/whitelist/{{staff.id}}"
+                                        class="btn btn-outline-success btn-sm rounded-3">Unblock</a>
                                     {% endif %}
                                 </td>
                             </tr>

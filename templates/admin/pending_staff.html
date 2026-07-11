@@ -58,8 +58,8 @@
                                     <td>{{staff.created_at.strftime("%d %B %Y")}}</td>
                                     <td>{{staff.status}}</td>
                                     <td>
-                                        <a href="#" class=" btn btn-success rounded-3 btn-sm ">Approve</a>
-                                        <a href="#" class="btn btn-outline-danger btn-sm rounded-3">Reject</a>
+                                        <a href="/admin_update/staff/approve/{{staff.id}}" class=" btn btn-success rounded-3 btn-sm ">Approve</a>
+                                        <a href="/admin_update/staff/reject/{{staff.id}}" class="btn btn-outline-danger btn-sm rounded-3">Reject</a>
                                     </td>
                                 </tr>
                                 {% endfor %}

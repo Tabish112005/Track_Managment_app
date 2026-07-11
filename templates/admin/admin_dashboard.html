@@ -16,18 +16,17 @@
             <div class="navbar-brand ">
                 <a class="navbar-brand fw-bold fs-4" href="#">TrekEase</a>
             </div>
-                <ul class="nav align-items-center">
-                    <li class="nav-item"><a class="nav-link active link-light" href="#">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="treks">Treks</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="staff">Staff</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="pending_staff">Applications</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="users">Trekkers</a></li>
-                    <li class="nav-item"><a class="nav-link link-light" href="bookings">Bookings</a></li>
-                    <li class="nav-item ms-2">
-                        <a href="/" class="btn btn-outline-light rounded-4">Logout</a>
-                    </li>
-                </ul>
-            </div>
+            <ul class="nav align-items-center">
+                <li class="nav-item"><a class="nav-link active link-light" href="#">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link link-light" href="treks">Treks</a></li>
+                <li class="nav-item"><a class="nav-link link-light" href="staff">Staff</a></li>
+                <li class="nav-item"><a class="nav-link link-light" href="pending_staff">Applications</a></li>
+                <li class="nav-item"><a class="nav-link link-light" href="users">Trekkers</a></li>
+                <li class="nav-item"><a class="nav-link link-light" href="bookings">Bookings</a></li>
+                <li class="nav-item ms-2">
+                    <a href="/" class="btn btn-outline-light rounded-4">Logout</a>
+                </li>
+            </ul>
         </div>
     </nav>
 
@@ -105,7 +104,7 @@
                                         {% if user.bookings %}
                                         {{ user.bookings[0].booking_date.strftime("%d %B %Y") }}
                                         {% else %}
-                                        <span class="text-muted">—</span>
+                                        <span class="text-muted">-</span>
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -129,7 +128,7 @@
                                     <th scope="col">Assign Trek</th>
                                     <th scope="col">Booking Date</th>
                                 </tr>
-                            
+
 
                             <tbody class="text-center">
                                 {% for staff in active_staff %}
@@ -142,15 +141,15 @@
                                         {% if staff.assigned_trek %}
                                         {{ staff.assigned_trek[0].trek_name }}
                                         {% else %}
-                                        <span class="text-muted">—</span>
+                                        <span class="text-muted">-</span>
                                         {% endif %}
                                     </td>
 
                                     <td>
                                         {% if staff.assigned_trek %}
-                                        {{ staff.assigned_trek[0].start_date.strftime("%d %B %Y") }}
+                                        {{staff.assigned_trek[0].start_date.strftime("%d %B %Y")}}
                                         {% else %}
-                                        <span class="text-muted">—</span>
+                                        <span class="text-muted">-</span>
                                         {% endif %}
                                     </td>
 
@@ -216,7 +215,7 @@
                             <td>{{book.trek.trek_name}}</td>
                             <td>{{book.user.name}}</td>
                             <td>{{book.booking_date.strftime("%d %B %Y")}}</td>
-                            <td>{{book.staff.name}}</td>
+                            <td>{{book.trek.staff.name if (book.trek and book.trek.staff) else 'Unassigned'}}</td>
                             <td>{{book.status}}</td>
                         </tr>
                         {% endfor %}

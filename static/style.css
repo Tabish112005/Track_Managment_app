@@ -56,3 +56,25 @@ body {
     box-shadow: 0 0 20px rgba(13, 202, 240, 0.4);
     border-radius: 20px;
 }
+
+#create_trek {
+    border: 2px solid grey;
+    padding: 3%;
+    margin-top: 5%;
+    background-color: white;
+    border-radius: 20px;
+    min-height: 350px;
+    height: fit-content;
+    margin: auto;
+    box-shadow: 0 0 20px rgba(13, 202, 240, 0.4);
+}
+
+#user_details{
+    border: 2px solid grey;
+    width: 500px;
+    padding: 1%;
+    background-color: white;
+    border-radius: 20px;
+    height: fit-content;
+    box-shadow: 0 0 20px rgba(13, 202, 240, 0.4);
+}

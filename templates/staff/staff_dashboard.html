@@ -64,7 +64,7 @@
     <br>
     <div class="container">
         <div class="border-bottom">
-            <h2 class="fw-semibold text-dark">Hello {{staff.name}}</h2>
+            <h2 class="fw-semibold text-dark">Hello, {{staff.name}}</h2>
             <p class="text-center fs-3 fw-semibold ">Dashboard</p>
         </div>
         <div class="row my-2 g-3 text-center">
@@ -88,7 +88,7 @@
     </div>
 
     <div class="container flex-grow-1 my-3">
-        <div class="m-2 border-bottom">
+        <div class=" border-bottom">
             <h2>Assigned Trek Info</h2>
         </div>
         <div class="row">
@@ -112,8 +112,8 @@
             </div>
             <br>
             {% else %}
-            <div class="border-bottom">
-                <h3 class="fw-bold text-dark">No Upcomming Treks</h3>
+            <div >
+                <h5 class="m-2 fw-semibold text-dark">No Upcomming Treks</h5>
             </div>
             {% endfor %}
         </div>
