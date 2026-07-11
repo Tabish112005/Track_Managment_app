@@ -40,6 +40,7 @@
 
 </body>
 {% else %}
+
 <body class="d-flex flex-column min-vh-100 bg-light">
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-info shadow-sm">
@@ -48,9 +49,11 @@
                 <a class="navbar-brand fw-bold fs-4" href="/staff_dashboard/{{staff.id}}">TrekEase</a>
             </div>
             <ul class="nav align-items-center">
-                <li class="nav-item"><a class="nav-link active link-light" href="/staff_dashboard/{{staff.id}}">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link link-light" href="#">Treks</a></li>
-                <li class="nav-item"><a class="nav-link link-light" href="/participants/{{staff.id}}">Participants</a></li>
+                <li class="nav-item"><a class="nav-link active link-light"
+                        href="/staff_dashboard/{{staff.id}}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link active link-light fw-bold" href="#">Treks</a></li>
+                <li class="nav-item"><a class="nav-link link-light" href="/participants/{{staff.id}}">Participants</a>
+                </li>
                 <li class="nav-item ms-2">
                     <a href="/" class="btn btn-outline-light rounded-4">Logout</a>
                 </li>
@@ -67,7 +70,8 @@
             <div class="row mb-3 g-3">
                 <div class=" mb-2  my-4 rounded-4 " id="border-blue">
                     <h3 class="text-center fw-semibold mb-2 mt-3 ">{{trek.trek_name}}</h3>
-                    <p class="border-bottom pb-2 text-mute">{{trek.start_date.strftime("%d %B %Y")}} - {{trek.end_date.strftime("%d %B %Y")}}</p>
+                    <p class="border-bottom pb-2 text-mute">{{trek.start_date.strftime("%d %B %Y")}} -
+                        {{trek.end_date.strftime("%d %B %Y")}}</p>
                     <table class="table table-hover align-middle mb-2">
                         <thead class="text-center table-light sticky-top">
                             <tr>
@@ -83,12 +87,12 @@
 
                             <tr>
                                 <td>{{loop.index}}</td>
-                                <td>{{trek.booking|length}}</td>
+                                <td>{{trek.bookings| selectattr('status', 'ne', 'Cancelled')|list|length}}</td>
                                 <td>{{trek.location}}</td>
                                 <td>{{trek.duration}} Days</td>
                                 <td>{{trek.status}}</td>
-                                <td>
-                                    <a href="#" class=" btn btn-outline-warning rounded-3 btn-sm ">Manage</a>
+                                <td class="col-2">
+                                    <a href="/update_trek/{{staff.id}}/{{trek.id}}" class=" btn btn-outline-warning rounded-3 btn-sm ">Manage</a>
                                 </td>
                             </tr>
                         </tbody>
@@ -96,6 +100,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <br>
+    {% else %}
+    <div>
+        <h5 class=" text-center m-2 fw-semibold text-dark">No Upcomming Treks</h5>
     </div>
     {% endfor %}
 

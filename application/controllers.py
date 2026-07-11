@@ -238,7 +238,8 @@ def bookings():
 @app.route("/staff_dashboard/<int:staff_id>")
 def staff_dashboard(staff_id):
     staff = User.query.get(staff_id)
-    return render_template("/staff/staff_dashboard.html", staff=staff)
+    participants = sum(len([b for b in trek.bookings if b.status == 'Booked']) for trek in staff.assigned_trek)
+    return render_template("/staff/staff_dashboard.html", staff=staff, participants=participants)
 
 @app.route("/staff_treks/<int:staff_id>")
 def staff_treks(staff_id):
@@ -248,7 +249,8 @@ def staff_treks(staff_id):
 @app.route("/participants/<int:staff_id>")
 def participants(staff_id):
     staff =User.query.get(staff_id)
-    return render_template("/staff/participants.html", staff=staff)
+    trek = Trek.query.filter_by(staff_id=staff_id).all()
+    return render_template("/staff/participants.html", staff=staff, trek=trek)
 
 
 

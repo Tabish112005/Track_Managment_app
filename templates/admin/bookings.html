@@ -20,7 +20,7 @@
                 <li class="nav-item"><a class="nav-link link-light" href="staff">Staff</a></li>
                 <li class="nav-item"><a class="nav-link link-light" href="pending_staff">Applications</a></li>
                 <li class="nav-item"><a class="nav-link link-light" href="users">Trekkers</a></li>
-                <li class="nav-item"><a class="nav-link link-light" href="#">Bookings</a></li>
+                <li class="nav-item"><a class="nav-link link-light fw-bold" href="#">Bookings</a></li>
                 <li class="nav-item ms-2">
                     <a href="/" class="btn btn-outline-light rounded-4">Logout</a>
                 </li>
@@ -59,10 +59,11 @@
                                 <td>{{book.status}}</td>
                                 <td>
                                     {% if book.status == 'Booked' %}
-                                    <a href="/admin_update/booking/cancel/{{staff.id}}"
+                                    <a href="/admin_update/booking/cancel/{{book.id}}"
                                         class="btn btn-outline-danger btn-sm rounded-3">Cancel</a>
                                     {% elif book.status == 'Cancelled' %}
-                                    <p>Cancelled</p>
+                                    <a href="/admin_update/booking/cancel/{{book.id}}"
+                                        class="btn btn-outline-danger btn-sm rounded-3 disabled" >Cancel</a>
                                     {% else %}
                                     <p>Closed</p>
                                     {% endif %}

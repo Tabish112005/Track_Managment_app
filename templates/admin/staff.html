@@ -17,7 +17,7 @@
             <ul class="nav align-items-center">
                 <li class="nav-item"><a class="nav-link active link-light" href="admin_dashboard">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link link-light" href="treks">Treks</a></li>
-                <li class="nav-item"><a class="nav-link link-light" href="#">Staff</a></li>
+                <li class="nav-item"><a class="nav-link link-light fw-bold" href="#">Staff</a></li>
                 <li class="nav-item"><a class="nav-link link-light" href="pending_staff">Applications</a></li>
                 <li class="nav-item"><a class="nav-link link-light" href="users">Trekkers</a></li>
                 <li class="nav-item"><a class="nav-link link-light" href="bookings">Bookings</a></li>
@@ -39,6 +39,7 @@
 
                         </div>
                         <div class="col-auto">
+                            <form action="/search/1/staff" method="POST">
                             <select class="form-select rounded-3" aria-label="Default select example" name="parameter">
                                 <option value="3">Name</option>
                                 <option value="1">id</option>
@@ -46,6 +47,7 @@
                                 <option value="3">Email</option>
                                 <option value="2">Phone No</option>
                             </select>
+                            </form>
                         </div>
                         <div class="col-auto">
                             <input type="submit" class="btn btn-outline-success rounded-3 mb-3" value="Search">
