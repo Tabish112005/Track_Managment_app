@@ -33,21 +33,19 @@
             <div class="row my-4 g-3">
                 <div class="mb-2 d-flex justify-content-between w-100 border-bottom pb-2">
                     <h2 class="fw-semibold">Staff</h2>
-                    <form class="row g-3">
+                    <form action="/search/1/staff" method="POST" class="row g-2">
                         <div class="col-auto">
-                            <input type="text" class="form-control rounded-3" placeholder="Search" name="keyword">
+                            <input type="text" class="form-control rounded-3" placeholder="Search" name="keyword" required>
 
                         </div>
                         <div class="col-auto">
-                            <form action="/search/1/staff" method="POST">
                             <select class="form-select rounded-3" aria-label="Default select example" name="parameter">
-                                <option value="3">Name</option>
-                                <option value="1">id</option>
-                                <option value="3">Username</option>
-                                <option value="3">Email</option>
-                                <option value="2">Phone No</option>
+                                <option value="name">Name</option>
+                                <option value="id">id</option>
+                                <option value="username">Username</option>
+                                <option value="email">Email</option>
+                                <option value="phone_no">Phone No</option>
                             </select>
-                            </form>
                         </div>
                         <div class="col-auto">
                             <input type="submit" class="btn btn-outline-success rounded-3 mb-3" value="Search">
@@ -76,7 +74,8 @@
                                 <td>{{staff.phone_no}}</td>
                                 <td>{{staff.status}}</td>
                                 <td>
-                                    <a href="/details/1/staff/{{staff.id}}" class="btn btn-outline-secondary btn-sm rounded-3">View Info</a>
+                                    <a href="/details/1/staff/{{staff.id}}"
+                                        class="btn btn-outline-secondary btn-sm rounded-3">View Info</a>
                                     {% if staff.status == "Active" %}
                                     <a href="/admin_update/staff/blacklist/{{staff.id}}"
                                         class=" btn btn-danger rounded-3 btn-sm ">Block</a>

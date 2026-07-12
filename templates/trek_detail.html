@@ -19,7 +19,7 @@
             </div>
             <ul class="nav align-items-center">
                 <li class="nav-item"><a class="nav-link active link-light" href="/admin_dashboard">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link link-light" href="/treks">Treks</a></li>
+                <li class="nav-item"><a class="nav-link link-light fw-bold" href="/treks">Treks</a></li>
                 <li class="nav-item"><a class="nav-link link-light" href="/staff">Staff</a></li>
                 <li class="nav-item"><a class="nav-link link-light" href="/pending_staff">Applications</a></li>
                 <li class="nav-item"><a class="nav-link link-light" href="/users">Trekkers</a></li>
@@ -38,9 +38,12 @@
                 <a class="navbar-brand fw-bold fs-4" href="/user_dashboard/{{detailer.id}}">TrekEase</a>
             </div>
             <ul class="nav align-items-center">
-                <li class="nav-item"><a class="nav-link active link-light" href="/user_dashboard/{{detailer.id}}">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link link-light" href="/staff_treks/{{detailer.id}}">Treks</a></li>
-                <li class="nav-item"><a class="nav-link link-light" href="/participants/{{detailer.id}}">Participants</a></li>
+                <li class="nav-item"><a class="nav-link active link-light"
+                        href="/user_dashboard/{{detailer.id}}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link link-light fw-bold" href="/user_treks/{{detailer.id}}">Treks</a></li>
+                <li class="nav-item"><a class="nav-link link-light" href="/my_bookings/{{detailer.id}}">Bookings</a></li>
+                <li class="nav-item"><a class="nav-link link-light" href="/profile/{{detailer.id}}">Profile</a></li>
+
                 <li class="nav-item ms-2">
                     <a href="/" class="btn btn-outline-light rounded-4">Logout</a>
                 </li>
@@ -51,8 +54,9 @@
 
     <div class="container my-5 d-flex justify-content-center">
         <div class="card shadow border-0" style="max-width: 900px; width: 100%; border-radius: 15px; overflow: hidden;">
-            <img src="{{trek.image}}" class="card-img-top" alt="{{trek.trek_name}} Image" style="height: 400px; object-fit: cover;">
-            
+            <img src="{{trek.image}}" class="card-img-top" alt="{{trek.trek_name}} Image"
+                style="height: 400px; object-fit: cover;">
+
             <div class="card-body p-4">
                 <div class="d-flex justify-content-between align-items-start mb-2">
                     <div>
@@ -67,20 +71,24 @@
                 <div class="row g-3 mb-4 text-center">
                     <div class="col-6 col-md-4">
                         <div class="p-4 bg-white border rounded shadow-sm h-100">
-                            <small class="text-muted d-block text-uppercase fw-semibold" style="font-size: 0.75rem;">Duration</small>
+                            <small class="text-muted d-block text-uppercase fw-semibold"
+                                style="font-size: 0.75rem;">Duration</small>
                             <span class="fw-bold text-dark">{{trek.duration}}</span>
                         </div>
                     </div>
                     <div class="col-6 col-md-4">
                         <div class="p-4 bg-white border rounded shadow-sm h-100">
-                            <small class="text-muted d-block text-uppercase fw-semibold" style="font-size: 0.75rem;">Open Slots</small>
+                            <small class="text-muted d-block text-uppercase fw-semibold"
+                                style="font-size: 0.75rem;">Open Slots</small>
                             <span class="fw-bold text-dark">{{trek.available_slots}} left</span>
                         </div>
                     </div>
                     <div class="col-6 col-md-4">
                         <div class="p-4 bg-white border rounded shadow-sm h-100">
-                            <small class="text-muted d-block text-uppercase fw-semibold" style="font-size: 0.75rem;">Status</small>
-                            <span class="fw-bold text-capitalize {% if trek.status == 'Open' %}text-success{% else %}text-warning{% endif %}">
+                            <small class="text-muted d-block text-uppercase fw-semibold"
+                                style="font-size: 0.75rem;">Status</small>
+                            <span
+                                class="fw-bold text-capitalize {% if trek.status == 'Open' %}text-success{% else %}text-warning{% endif %}">
                                 {{trek.status}}
                             </span>
                         </div>
@@ -97,19 +105,23 @@
                 <hr class="my-4">
                 <div class="d-flex justify-content-end align-items-center">
                     {% if detailer.role != 'user' %}
-                        <a href="/update_trek/{{detailer.id}}/{{trek.id}}" class="btn btn-info rounded-4 mx-1 px-4">Update Trek</a>
-                        {% if detailer.role == 'admin' %}
-                            <a href="/assign_staff/{{trek.id}}" class="btn btn-warning mx-1  rounded-4 px-4">Assign Staff</a>
-                        {% endif %}
-                        {% if trek.status == 'Open' %}
-                            <a href="/close_trek/{{detailer.id}}/{{trek.id}}" class="btn btn-warning mx-1 rounded-4  px-4">Close Trek</a>
-                        {% else %}
-                            <a href="/open_trek/{{detailer.id}}/{{trek.id}}" class="btn btn-outline-success rounded-4 mx-1 px-4">Open Trek</a>
-                        {% endif %}
+                    <a href="/update_trek/{{detailer.id}}/{{trek.id}}" class="btn btn-info rounded-4 mx-1 px-4">Update
+                        Trek</a>
+                    {% if detailer.role == 'admin' %}
+                    <a href="/assign_staff/{{trek.id}}" class="btn btn-warning mx-1  rounded-4 px-4">Assign Staff</a>
+                    {% endif %}
+                    {% if trek.status == 'Open' %}
+                    <a href="/close_trek/{{detailer.id}}/{{trek.id}}" class="btn btn-warning mx-1 rounded-4  px-4">Close
+                        Trek</a>
                     {% else %}
-                        {% if trek.status == 'Open' %}
-                            <a href="/booking/{{detailer.id}}/{{trek.id}}" class="btn btn-warning btn-lg rounded-4 px-5 fw-bold shadow-sm">Book Now</a>
-                        {% endif %}
+                    <a href="/open_trek/{{detailer.id}}/{{trek.id}}"
+                        class="btn btn-outline-success rounded-4 mx-1 px-4">Open Trek</a>
+                    {% endif %}
+                    {% else %}
+                    {% if trek.status == 'Open' %}
+                    <a href="/booking/{{detailer.id}}/{{trek.id}}"
+                        class="btn btn-warning btn-lg rounded-4 px-5 fw-bold shadow-sm">Book Now</a>
+                    {% endif %}
                     {% endif %}
                 </div>
 
@@ -118,4 +130,5 @@
     </div>
 
 </body>
+
 </html>

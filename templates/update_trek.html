@@ -39,7 +39,7 @@
             <ul class="nav align-items-center">
                 <li class="nav-item"><a class="nav-link active link-light"
                         href="/staff_dashboard/{{updater_id}}">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link active link-light fw-bold" href="#">Treks</a></li>
+                <li class="nav-item"><a class="nav-link active link-light fw-bold" href="/staff_treks/{{updater_id}}">Treks</a></li>
                 <li class="nav-item"><a class="nav-link link-light" href="/participants/{{updater_id}}">Participants</a>
                 </li>
                 <li class="nav-item ms-2">
@@ -86,12 +86,7 @@
                         <option>Hard</option>
                     </select>
                     {% else %}
-                    <select id="input4" class="form-select disabled" id="input4" name="difficulty" value="{{trek.difficulty}} "  required>
-                        <option selected>{{trek.difficulty}}</option>
-                        <option>Easy</option>
-                        <option>Medium</option>
-                        <option>Hard</option>
-                    </select>
+                    <input type="Text" class="form-control" id="input4" name="difficulty" value="{{trek.difficulty}}" readonly required>
                     {% endif %}
                 </div>
                 <div class="col-md-3">

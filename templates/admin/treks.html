@@ -33,18 +33,18 @@
             <div class="row my-4 g-3">
                 <div class="mb-2 d-flex justify-content-between align-items-center w-100 border-bottom pb-2">
                     <h2 class="fw-semibold">Treks</h2>
-                    <form class="row g-3">
+                    <form class="row g-3" action="search/1/trek" method="POST">
                         <div class="col-auto">
                             <input type="text" class="form-control rounded-3" placeholder="Search" name="keyword">
 
                         </div>
                         <div class="col-auto">
                             <select class="form-select rounded-3" aria-label="Default select example" name="parameter">
-                                <option value="3">Name</option>
-                                <option value="1">id</option>
-                                <option value="3">Location</option>
-                                <option value="2">Difficulty</option>
-                                <option value="3">Duration</option>
+                                <option value="name">Name</option>
+                                <option value="id">id</option>
+                                <option value="location">Location</option>
+                                <option value="difficulty">Difficulty</option>
+                                <option value="status">Status</option>
                             </select>
                         </div>
                         <div class="col-auto">
@@ -60,7 +60,7 @@
                                 <th scope="col">id</th>
                                 <th scope="col">Trek Name</th>
                                 <th class="col-2"scope="col">Location</th>
-                                <th class="col-2" scope="col">Assigned Staff id</th>
+                                <th class="col-2" scope="col">Staff id</th>
                                 <th class="col-2" scope="col">Status</th>
                                 <th class="col-3" scope="col">Action</th>
                             </tr>
@@ -68,7 +68,7 @@
                         <tbody class="text-center">
                             {% for trek in treks %}
                             <tr>
-                                <td>{{loop.index}}</td>
+                                <td>{{trek.id}}</td>
                                 <td>{{trek.trek_name}}</td>
                                 <td>{{trek.location}}</td>
                                 <td>{{trek.staff_id}}</td>

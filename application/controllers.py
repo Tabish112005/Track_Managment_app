@@ -252,7 +252,16 @@ def participants(staff_id):
     trek = Trek.query.filter_by(staff_id=staff_id).all()
     return render_template("/staff/participants.html", staff=staff, trek=trek)
 
+@app.route("/staff_update/<int:detailer_id>/<type>/<int:id>")
+def staff_update(detailer_id, type, id):
+    if type == 'booking':
+        book = Booking.query.get(id)
+        if book.status == 'Booked':
+            book.status = 'Cancelled'
+            db.session.commit()
 
+        return redirect(f"/participants/{id}")
+    return redirect(f"/staff_trek/{detailer_id}")
 
 # ----- User Dashboard ----- #
 
@@ -302,3 +311,55 @@ def profile(user_id):
         return redirect(f"/profile/{user.id}")
     
     return render_template("/user/profile.html", user=user)
+
+@app.route("/search/<int:user_id>/<type>", methods=['GET','POST'])
+def search(user_id, type):
+    keyword = request.form.get('keyword')
+    parameter = request.form.get('parameter')
+    user = User.query.get(user_id)
+
+    if type == 'staff':
+        if parameter == 'id':
+            staff = User.query.get(keyword)
+        elif parameter == 'email':
+            staff = User.query.filter_by(email=keyword).first()
+        elif parameter == 'phone_no':
+            staff = User.query.filter_by(phone_no=keyword).first()
+        elif parameter == 'name':
+            staff = User.query.filter_by(name=keyword).first()
+        if staff:
+            return redirect(f'/details/{user_id}/staff/{staff.id}')
+        else:
+            return "<h2>No such staff exits</h2>"
+    elif type == 'user':
+        if parameter == 'id':
+            user = User.query.get(keyword)
+        elif parameter == 'email':
+            user = User.query.filter_by(email=keyword).first()
+        elif parameter == 'phone_no':
+            user = User.query.filter_by(phone_no=keyword).first()
+        elif parameter == 'name':
+            user = User.query.filter_by(name=keyword).first()
+        if user:
+            return redirect(f'/details/{user_id}/user/{user.id}')
+        else:
+            return "<h2>No such user exits</h2>"
+    elif type == 'trek':
+        trek = None
+        trek_list = None
+        if parameter == 'id':
+            trek = Trek.query.get(keyword)
+        elif parameter == 'name':
+            trek = Trek.query.filter_by(trek_name=keyword).first()
+        elif parameter == 'location':
+            trek_list = Trek.query.filter_by(location=keyword).all()
+        elif parameter == 'difficulty':
+            trek_list = Trek.query.filter_by(difficulty=keyword).all()
+        elif parameter == 'status':
+            trek_list = Trek.query.filter_by(status=keyword).all()
+        if trek:
+            return redirect(f'/details/{user_id}/trek/{trek.id}')
+        elif trek_list:
+            return render_template("search_trek.html", trek_list=trek_list, parameter=parameter, keyword=keyword, user_id=user_id)
+        else:
+            return "<h2>No such trek exits</h2>"

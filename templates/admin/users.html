@@ -33,18 +33,18 @@
             <div class="row my-4 g-3">
                 <div class="mb-2 d-flex justify-content-between align-items-center w-100 border-bottom pb-2">
                     <h2 class="fw-semibold">Users</h2>
-                    <form class="row g-3">
+                    <form class="row g-3" action="/search/1/user" method="POST">
                         <div class="col-auto">
                             <input type="text" class="form-control rounded-3" placeholder="Search" name="keyword">
 
                         </div>
                         <div class="col-auto">
                             <select class="form-select rounded-3" aria-label="Default select example" name="parameter">
-                                <option value="3">Name</option>
-                                <option value="1">id</option>
-                                <option value="3">Userame</option>
-                                <option value="3">Email</option>
-                                <option value="2">Phone No</option>
+                                <option value="name">Name</option>
+                                <option value="id">id</option>
+                                <option value="username">Userame</option>
+                                <option value="email">Email</option>
+                                <option value="phone_no">Phone No</option>
                             </select>
                         </div>
                         <div class="col-auto">
@@ -57,7 +57,7 @@
                     <table class="table table-hover align-middle mb-0">
                         <thead class="text-center table-light sticky-top">
                             <tr>
-                                <th scope="col">user id</th>
+                                <th scope="col">User id</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Phone No.</th>

@@ -46,7 +46,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-info shadow-sm">
         <div class="container">
             <div class="navbar-brand">
-                <a class="navbar-brand fw-bold fs-4" href="#">TrekEase</a>
+                <a class="navbar-brand fw-bold fs-4" href="/staff_dashboard/{{staff.id}}">TrekEase</a>
             </div>
             <ul class="nav align-items-center">
                 <li class="nav-item"><a class="nav-link link-light" href="/staff_dashboard/{{staff.id}}">Dashboard</a>
@@ -82,6 +82,7 @@
                                 <th scope="col">Email</th>
                                 <th scope="col" class="col-2">Contact Number</th>
                                 <th scope="col">Status</th>
+                                <th class="col-2"scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
@@ -92,6 +93,15 @@
                                 <td>{{booking.user.email}}</td>
                                 <td>{{booking.user.phone_no if booking.user.phone_no else 'N/A'}}</td>
                                 <td>{{booking.status}}</td>
+                                <td>
+                                    {% if booking.status == 'Booked' %}
+                                    <a href="/staff_update/{{staff.id}}/booking/{{booking.id}}"
+                                        class="btn btn-outline-danger btn-sm rounded-3">Cancel</a>
+                                    {% else %}
+                                    <a href="/staff_update/{{staff.id}}/booking/{{booking.id}}"
+                                        class="btn btn-outline-danger btn-sm rounded-3 disabled">Cancel</a>
+                                    {% endif %}
+                                </td>
                                 
                             </tr>
                             
