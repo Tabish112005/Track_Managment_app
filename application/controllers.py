@@ -3,6 +3,10 @@ from flask import render_template, redirect, request
 from .models import *
 from flask import current_app as app
 
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 @app.route("/")
 def home():
     trek_count = Trek.query.count()
@@ -23,15 +27,15 @@ def register(role):
 
         user = User.query.filter_by(username=username).first()
         if user:
-            return "This is username alreay exist."
+            return "<h2>This is username alreay exist.</h2>"
         
         user = User.query.filter_by(email=email).first()
         if user:
-            return "This is email alreay registered another account."
+            return "<h2>This is email alreay registered another account.</h2>"
         
         user = User.query.filter_by(phone_no=phone_no).first()
         if user:
-            return "This is Phone Number alreay registered another account."
+            return "<h2>This is Phone Number alreay registered another account.</h2>"
         
         if role == "user":
             new_user = User(username=username, name=name, email=email, password=password, phone_no=phone_no)
@@ -105,10 +109,16 @@ def admin_update(whom,action,id):
         book = Booking.query.get(id)
         if action == 'cancel':
             book.status = 'Cancelled'
+            db.session.commit()
+            return redirect("/bookings")
+        else:
+            return '<h2>Trek is already Completed.</h2>' 
+    elif whom == 'trek':
+        trek = Trek.query.get(id)
         if action == 'complete':
-            book.status = 'Completed'
-        db.session.commit()
-        return redirect("/bookings")
+            trek.status = 'Completed'
+            db.session.commit()
+        return redirect("/treks")
     return redirect("/admin_dashboard")
 
 @app.route("/details/<detailer_id>/<type>/<id>")
@@ -165,6 +175,32 @@ def assign_staff(trek_id):
         return redirect(f"/details/1/trek/{trek_id}")
     return render_template("/admin/assign_staff.html", available_staff=available_staff, trek=trek)
 
+@app.route("/treks")
+def treks():
+    treks = Trek.query.all()
+    return render_template("/admin/treks.html",treks=treks)
+
+@app.route("/staff")
+def staff():
+    all_staff = User.query.filter(User.role == 'staff', User.status != 'Pending').all()
+    return render_template("/admin/staff.html",all_staff=all_staff)
+
+@app.route("/pending_staff")
+def pending_staff():
+    all_staff = User.query.filter(User.role == 'staff', User.status == 'Pending').all()
+    return render_template("/admin/pending_staff.html",all_staff=all_staff)
+
+@app.route("/users")
+def users():
+    trekkers = User.query.filter(User.role == 'user').all()
+    return render_template("/admin/users.html",trekkers=trekkers)
+
+@app.route("/bookings")
+def bookings():
+    user = User.query.filter_by(role='user').all()
+    staff = User.query.filter_by(role='staff').all()
+    bookings = Booking.query.all()
+    return render_template("/admin/bookings.html", bookings=bookings, user=user, staff=staff)
 
 # ----- Create Trek ----- #
 
@@ -204,34 +240,6 @@ def update_trek(updater_id,trek_id):
         db.session.commit()
         return redirect(f"/details/{updater_id}/trek/{trek_id}")
     return render_template("/update_trek.html", trek=trek, updater_id=updater_id)
-
-@app.route("/treks")
-def treks():
-    treks = Trek.query.all()
-    return render_template("/admin/treks.html",treks=treks)
-
-@app.route("/staff")
-def staff():
-    all_staff = User.query.filter(User.role == 'staff', User.status != 'Pending').all()
-    return render_template("/admin/staff.html",all_staff=all_staff)
-
-@app.route("/pending_staff")
-def pending_staff():
-    all_staff = User.query.filter(User.role == 'staff', User.status == 'Pending').all()
-    return render_template("/admin/pending_staff.html",all_staff=all_staff)
-
-@app.route("/users")
-def users():
-    trekkers = User.query.filter(User.role == 'user').all()
-    return render_template("/admin/users.html",trekkers=trekkers)
-
-@app.route("/bookings")
-def bookings():
-    user = User.query.filter_by(role='user').all()
-    staff = User.query.filter_by(role='staff').all()
-    bookings = Booking.query.all()
-    return render_template("/admin/bookings.html", bookings=bookings, user=user, staff=staff)
-
 
 # ----- Staff_Dashboard ----- #
 
@@ -297,20 +305,31 @@ def profile(user_id):
     
     if request.method == 'POST':
         if 'name' in request.form:
-            user.name = request.form.get('name')
-            user.email = request.form.get('email')
-            user.phone_no = request.form.get('phone_no')
-        elif 'current' in request.form:
-            current_password = request.form.get('current')
-            new_password = request.form.get('updated')
-            if current_password == user.password:
-                user.password=new_password
+            number = request.form.get("phone_no")
+            userx = User.query.filter(User.phone_no==number, User.id != user_id).first()
+            if userx:
+                return "<h2>This Phone No. is already register with another account</h2>"
             else:
-                return "<h2>Enter Correct Password</h2>"
+                user.name = request.form.get('name')
+                user.phone_no = number
+        elif 'username' in request.form:
+            registered = request.form.get("username")
+            usery = User.query.filter(User.username==registered, User.id != user_id).first()
+            if usery:
+                return "<h2>This username is already register with another account</h2>"
+            else:
+                current_password = request.form.get('current')
+                new_password = request.form.get('updated')
+                if current_password == user.password:
+                    user.password=new_password
+                else:
+                    return "<h2>Enter Correct Password</h2>"
         db.session.commit()
         return redirect(f"/profile/{user.id}")
     
     return render_template("/user/profile.html", user=user)
+
+# ----- Search ----- #
 
 @app.route("/search/<int:user_id>/<type>", methods=['GET','POST'])
 def search(user_id, type):
@@ -321,8 +340,6 @@ def search(user_id, type):
     if type == 'staff':
         if parameter == 'id':
             staff = User.query.get(keyword)
-        elif parameter == 'email':
-            staff = User.query.filter_by(email=keyword).first()
         elif parameter == 'phone_no':
             staff = User.query.filter_by(phone_no=keyword).first()
         elif parameter == 'name':
@@ -363,3 +380,36 @@ def search(user_id, type):
             return render_template("search_trek.html", trek_list=trek_list, parameter=parameter, keyword=keyword, user_id=user_id)
         else:
             return "<h2>No such trek exits</h2>"
+
+    # ----- Statistics ----- #
+
+@app.route("/statistics")
+def statistics():
+    all_treks = Trek.query.all()
+    x_axis = [trek.trek_name for trek in all_treks]
+    y_axis = [len(trek.bookings) for trek in all_treks]
+    plt.bar(x_axis,y_axis)
+    plt.xlabel("Treks Names --->")
+    plt.ylabel("No. of Bookings --->")
+    plt.xticks(rotation=20, ha='right')
+    plt.tight_layout()
+    plt.savefig('static/bar.png')
+    plt.close()
+
+    easy = 0
+    moderate = 0
+    hard = 0
+    for trek in all_treks:
+        if trek.difficulty == 'Easy':
+            easy += len(trek.bookings)
+        elif trek.difficulty == 'Moderate':
+            moderate += len(trek.bookings)
+        elif trek.difficulty == 'Hard':
+            hard += len(trek.bookings)
+    labels = ["Easy", "Moderate", "Hard"]
+    sizes = [easy,moderate,hard]
+    plt.pie(sizes,labels=labels)
+    plt.title("No. of Bookings based on difficulty")
+    plt.savefig("static/pie.png")
+    plt.close()
+    return render_template('admin/statistics.html')

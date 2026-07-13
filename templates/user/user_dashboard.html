@@ -91,7 +91,7 @@
                 <h2>Upcomming Treks</h2>
             </div>
             {% for book in user.bookings %}
-            {% if book.status == 'Booked' %}
+            {% if book.status == 'Booked' and book.trek.status == 'Open' %}
             <br>
             <div class="col-md-3 col-sm-6 py-2">
                 <div class="card h-100 rounded-4 overflow-hidden " id="border-blue">

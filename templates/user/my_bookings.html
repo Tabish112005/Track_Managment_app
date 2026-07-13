@@ -79,7 +79,13 @@
                                 <td>{{book.booking_date}}</td>
                                 <td>{{book.trek.duration}}</td>
                                 <td>{{book.trek.end_date.strftime("%d %B %Y")}}</td>
-                                <td>{{book.status}}</td>
+                                <td>
+                                    {% if book.trek.status =='Completed' %}
+                                    {{book.trek.status}}
+                                    {% else %}
+                                    {{book.status}}
+                                    {% endif %}
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>

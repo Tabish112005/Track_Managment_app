@@ -56,16 +56,22 @@
                                 <td>{{book.trek.trek_name}}</td>
                                 <td>{{book.trek.staff.name if (book.trek and book.trek.staff) else 'Unassigned'}}</td>
                                 <td>{{book.booking_date.strftime("%d %B %Y")}}</td>
-                                <td>{{book.status}}</td>
                                 <td>
-                                    {% if book.status == 'Booked' %}
+                                    {% if book.trek.status == 'Completed' %}
+                                        {{book.trek.status}}
+                                    {% else %}
+                                        {{book.status}}
+                                    {% endif %}
+                                </td>
+                                <td>
+
+                                    {% if book.status == 'Booked' and book.trek.status != "Completed" %}
                                     <a href="/admin_update/booking/cancel/{{book.id}}"
                                         class="btn btn-outline-danger btn-sm rounded-3">Cancel</a>
-                                    {% elif book.status == 'Cancelled' %}
-                                    <a href="/admin_update/booking/cancel/{{book.id}}"
-                                        class="btn btn-outline-danger btn-sm rounded-3 disabled" >Cancel</a>
                                     {% else %}
-                                    <p>Closed</p>
+                                    <a href="/admin_update/booking/cancel/{{book.id}}"
+                                        class="btn btn-outline-danger btn-sm rounded-3 disabled">Cancel</a>
+                                    
                                     {% endif %}
                                 </td>
                             </tr>

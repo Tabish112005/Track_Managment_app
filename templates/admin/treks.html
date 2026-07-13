@@ -74,15 +74,14 @@
                                 <td>{{trek.staff_id}}</td>
                                 <td>{{trek.status}}</td>
                                 <td>
-                                    {% if trek.status == 'Open' %}
                                     <a href="/details/1/trek/{{trek.id}}"
-                                        class="btn btn-outline-secondary btn-sm rounded-3">View Details</a>
-                                    <a href="/admin_update/trek/close/{{trek.id}}"
-                                        class=" btn btn-danger text-white rounded-3 btn-sm ">Close</a>
-                                    {% elif trek.status == 'Close' %}
-                                    <a href="/details/1/trek/{{trek.id}}" class="btn btn-outline-secondary btn-sm rounded-3">View Details</a>
-                                    <a href="/admin_update/trek/close/{{trek.id}}"
-                                        class=" btn btn-danger text-white rounded-3 btn-sm disabled">Close</a>
+                                    class="btn btn-outline-secondary btn-sm rounded-3">View Details</a>
+                                    {% if trek.status != 'Completed' %}
+                                    <a href="/admin_update/trek/complete/{{trek.id}}"
+                                        class=" btn btn-warning rounded-3 btn-sm ">Mark as Complete</a>
+                                    {% elif trek.status == 'Completed' %}
+                                    <a href="/admin_update/trek/complete/{{trek.id}}"
+                                        class=" btn btn-outline-warning rounded-3 btn-sm disabled">Completed</a>
                                     {% endif %}
                                 </td>
                             </tr>

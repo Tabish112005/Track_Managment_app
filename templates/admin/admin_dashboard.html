@@ -32,8 +32,14 @@
 
     <div class="container flex-grow-1 my-4">
 
-        <div class="mb-4">
-            <h2 class="fw-bold text-dark">Welcome {{user.name}}</h2>
+        <div class="row mb-4 d-flex justify-content-between align-items-center">
+            <div class="col-auto">
+                <h2 class="fw-semibold mb-0">Treks</h2>
+            </div>
+
+            <div class="col-auto">
+                <a href="/statistics" class="btn btn-outline-primary rounded-4">Statistics</a>
+            </div>
         </div>
 
         <div class="text-center row g-3 mb-5">
@@ -210,6 +216,7 @@
                     </thead>
                     <tbody class="text-center">
                         {% for book in active_bookings %}
+                        {% if book.trek.status != "Completed" and book.status != "Cancelled" %}
                         <tr>
                             <td>{{book.id}}</td>
                             <td>{{book.trek.trek_name}}</td>
@@ -218,6 +225,7 @@
                             <td>{{book.trek.staff.name if (book.trek and book.trek.staff) else 'Unassigned'}}</td>
                             <td>{{book.status}}</td>
                         </tr>
+                        {% endif %}
                         {% endfor %}
                     </tbody>
                 </table>
