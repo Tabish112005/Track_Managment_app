@@ -221,7 +221,7 @@ def create_trek():
                         available_slots=available_slots, start_date=start_date, end_date=end_date, description=description)
         db.session.add(new_trek)
         db.session.commit()
-    return render_template("/admin/create_trek.html")
+        return render_template("/admin/create_trek.html")
 
 @app.route("/update_trek/<int:updater_id>/<int:trek_id>", methods=['GET', 'POST'])
 def update_trek(updater_id,trek_id):
